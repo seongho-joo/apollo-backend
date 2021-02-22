@@ -32,3 +32,19 @@ $ touch babel.config.json
     "dev": "nodemon --exec babel-node server"
 },
 ```
+- Prisma Setup
+```
+$ npm i @prisma/cli -D
+$ npx prisma init
+```
+  - PostgreSQL 설치
+  - `CREATE DATABASE 데이터베이스명`
+  - `.env`파일 DATABASE_URL 수정
+
+- Prisma Migrage
+  - shema.prisma 파일의 데이터 모델을 쓰고 설명할 수 있게 해줌
+  - model == data
+  - `autoincrement()` 자동으로 증가 시켜줌
+  - `$ npx prisma migrate dev --preview-feature`
+    - prisma를 sql로 변환
+  
