@@ -10,7 +10,8 @@ $ npm install nodemon --save-dev
     "dev": "nodemon --exec node server.js"
 },
 ```
-- babel 없이 import 사용
+- babel 없이 import 사용 
+- node 14부터 사용가능
 ```
 // package.json
 "type": "module"
