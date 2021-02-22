@@ -16,6 +16,6 @@ model Movie {
   title     String
   year      Int
   genre     String? // 비어있어도됨
-  createAt  DateTime @default(now())
-  updateaAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
