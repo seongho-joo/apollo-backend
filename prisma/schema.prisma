@@ -11,7 +11,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Movie {
+model Movies {
   id        Int      @id @default(autoincrement()) // @id == primary key
   title     String
   year      Int

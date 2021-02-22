@@ -48,3 +48,17 @@ $ npx prisma init
   - `$ npx prisma migrate dev --preview-feature`
     - prisma를 sql로 변환
   
+- Schema Merge
+  - `$ npm install graphql-tools@latest `
+  ```
+  const loadedTypes = loadFilesSync(`${__dirname}/**/*.typeDefs.js`);
+  const loadedResolvers = loadFilesSync(
+    `${__dirname}/**/*.{queries, mutations}.js`
+  );
+
+  const typeDefs = mergeTypeDefs(loadedTypes);
+  const resolvers = mergeResolvers(loadedResolvers);
+
+  const schema = makeExecutableSchema(typeDefs, resolvers);
+
+  ```
