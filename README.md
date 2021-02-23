@@ -41,7 +41,7 @@ $ npx prisma init
   - `CREATE DATABASE 데이터베이스명`
   - `.env`파일 DATABASE_URL 수정
 
-- Prisma Migrage
+- Prisma Migrate
   - shema.prisma 파일의 데이터 모델을 쓰고 설명할 수 있게 해줌
   - model == data
   - `autoincrement()` 자동으로 증가 시켜줌
