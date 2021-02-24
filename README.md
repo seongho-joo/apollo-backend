@@ -62,3 +62,7 @@ $ npx prisma init
   const schema = makeExecutableSchema(typeDefs, resolvers);
 
   ```
+
+## User:
+
+- Create Account
