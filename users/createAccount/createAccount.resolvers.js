@@ -1,5 +1,5 @@
+import client from '../../client';
 import bcrypt from 'bcrypt';
-import client from '../client';
 
 export default {
   Mutation: {
@@ -7,7 +7,6 @@ export default {
       _,
       { firstName, lastName, username, email, password }
     ) => {
-      // check if username or email ar already on DB.
       try {
         const existingUser = await client.user.findFirst({
           where: {
@@ -30,8 +29,6 @@ export default {
       } catch (e) {
         return e;
       }
-      // hash password
-      // save and return the user
     },
   },
 };
