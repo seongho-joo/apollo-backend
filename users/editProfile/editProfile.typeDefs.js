@@ -7,7 +7,6 @@ export default gql`
   }
   type Mutation {
     edtitProfile(
-      id: Int!
       firstName: String
       lastName: String
       username: String
