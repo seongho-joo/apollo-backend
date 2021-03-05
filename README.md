@@ -63,6 +63,18 @@ $ npx prisma init
 
   ```
 
-## User:
-
-- Create Account
+## seeFollower
+- `username`의 팔로워
+  ```
+  // username의 팔로워 검색
+  const aFollowers = await client.user
+    .findUnique({ where: { username } })
+    .followers();
+  ```
+- `username`을 팔로잉
+  ```
+  // 모든 유저들 중 username을 팔로잉을 검색
+  const bFollowers = await client.user.findMany({
+    where: { following: { some: { username } } },
+  });
+  ```
