@@ -22,11 +22,7 @@ const resolvers: Resolvers = {
           },
         },
       }),
-<<<<<<< HEAD:photos/photos.resolvers.js
-    photos: ({ id }, { page }) => {
-=======
     photos: ({ id }, { page }, { loggedInUser, client }) => {
->>>>>>> ts-setup:src/photos/photos.resolvers.ts
       return client.hashtag.findUnique({ where: { id } }).photos();
     },
   },
