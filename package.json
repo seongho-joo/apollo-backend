@@ -36,7 +36,6 @@
     "graphql-tools": "^7.0.4",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
-    "node-pre-gyp": "^0.17.0",
     "pg": "^8.5.1"
   },
   "devDependencies": {
