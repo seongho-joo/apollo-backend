@@ -5,7 +5,7 @@ import { processHashtags } from '../phots.utils';
 const resolvers: Resolvers = {
   Mutation: {
     uploadPhoto: protectedResolver(
-      async (_, { file, caption }, { loggedInUser }, { client }) => {
+      async (_, { file, caption }, { loggedInUser, client }) => {
         let hashtagObj = [];
         if (caption) {
           hashtagObj = processHashtags(caption);
