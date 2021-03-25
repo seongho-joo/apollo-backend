@@ -31,6 +31,10 @@ export const protectedResolver = (ourResolver: Resolver) => (
   info
 ) => {
   if (!context.loggedInUser) {
+    const query = info.operation.operation == 'query';
+    if (query) {
+      return null;
+    }
     return {
       ok: false,
       error: 'Please login to perform this action.',
