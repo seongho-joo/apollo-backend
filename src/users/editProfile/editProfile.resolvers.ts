@@ -3,6 +3,7 @@ import * as bcrypt from 'bcryptjs';
 import { protectedResolver } from '../users.utils';
 import { Resolvers } from '../../types';
 import { User } from '@prisma/client';
+import { uploadToS3 } from '../../shared/shared.utils';
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -20,16 +21,17 @@ const resolvers: Resolvers = {
         },
         { loggedInUser, client }
       ) => {
-        let avatarUrl: string = null;
+        let avatarUrl = null;
         if (avatar) {
-          const { filename, createReadStream } = await avatar;
-          const fileName = `${loggedInUser.id}_${Date.now()}_${filename}`;
-          const readStream = createReadStream();
-          const writeStream = createWriteStream(
-            `${process.cwd()}/uploads/${fileName}`
-          );
-          readStream.pipe(writeStream);
-          avatarUrl = `http://localhost:4000/static/${fileName}`;
+          avatarUrl = await uploadToS3(avatar, loggedInUser.id, 'avatars');
+          // const { filename, createReadStream } = await avatar;
+          // const fileName = `${loggedInUser.id}_${Date.now()}_${filename}`;
+          // const readStream = createReadStream();
+          // const writeStream = createWriteStream(
+          //   `${process.cwd()}/uploads/${fileName}`
+          // );
+          // readStream.pipe(writeStream);
+          // avatarUrl = `http://localhost:4000/static/${fileName}`;
         }
         let hash = null;
         if (newPassword) {

@@ -1,3 +1,4 @@
+import { uploadToS3 } from '../../shared/shared.utils';
 import { Resolvers } from '../../types';
 import { protectedResolver } from '../../users/users.utils';
 import { processHashtags } from '../phots.utils';
@@ -10,9 +11,10 @@ const resolvers: Resolvers = {
         if (caption) {
           hashtagObj = processHashtags(caption);
         }
-        const photo = await client.photo.create({
+        const fileUrl = await uploadToS3(file, loggedInUser.id, 'uploads');
+        return await client.photo.create({
           data: {
-            file,
+            file: fileUrl,
             caption,
             user: {
               connect: { id: loggedInUser.id },
@@ -24,10 +26,6 @@ const resolvers: Resolvers = {
             }),
           },
         });
-        return {
-          ok: true,
-          photo,
-        };
       }
     ),
   },
