@@ -4,6 +4,7 @@ export default gql`
   type Message {
     id: Int!
     message: String!
+    read: Boolean!
     user: User!
     room: Room!
     createdAt: String!
@@ -11,7 +12,8 @@ export default gql`
   }
   type Room {
     id: Int!
-    user: [User]
+    unreadTotal: Int!
+    users: [User]
     messages: [Message]
     createdAt: String!
     updatedAt: String!
