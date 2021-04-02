@@ -21,6 +21,10 @@ const resolvers: Resolvers = {
       });
     },
   },
+  Message: {
+    user: ({ id }, _, { client }) =>
+      client.message.findUnique({ where: { id } }).user(),
+  },
 };
 
 export default resolvers;
