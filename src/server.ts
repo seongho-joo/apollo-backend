@@ -1,4 +1,5 @@
 require('dotenv').config();
+import * as http from 'http';
 import express = require('express');
 import logger = require('morgan');
 import { ApolloServer } from 'apollo-server-express';
@@ -13,10 +14,12 @@ const apollo = new ApolloServer({
   introspection: true,
   playground: true,
   context: async ({ req }) => {
-    return {
-      loggedInUser: await getUser(req.headers.token),
-      client,
-    };
+    if (req) {
+      return {
+        loggedInUser: await getUser(req.headers.token),
+        client,
+      };
+    }
   },
 });
 
@@ -27,6 +30,9 @@ app.use('/static', express.static('uploads'));
 
 apollo.applyMiddleware({ app });
 
-app.listen({ port: PORT }, () => {
+const httpServer = http.createServer(app);
+apollo.installSubscriptionHandlers(httpServer);
+
+httpServer.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}/graphql`);
 });
