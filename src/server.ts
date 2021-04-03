@@ -13,16 +13,32 @@ const apollo = new ApolloServer({
   resolvers,
   introspection: true,
   playground: true,
-  context: async ({ req }) => {
+  subscriptions: {
+    onConnect: async ({ token }: any) => {
+      if (!token) {
+        throw new Error("Yon can't listen.");
+      }
+      const loggedInUser = await getUser(token);
+      return {
+        loggedInUser,
+      };
+    },
+  },
+  context: async ({ req, connection }) => {
     if (req) {
       return {
         loggedInUser: await getUser(req.headers.token),
         client,
       };
+    } else {
+      const {
+        context: { loggedInUser },
+      } = connection;
+      return {
+        loggedInUser,
+        client,
+      };
     }
-    return {
-      client,
-    };
   },
 });
 
