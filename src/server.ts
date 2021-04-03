@@ -20,6 +20,9 @@ const apollo = new ApolloServer({
         client,
       };
     }
+    return {
+      client,
+    };
   },
 });
 
